@@ -46,7 +46,7 @@ twotes.list = function(req, res) {
 twotes.add = function (req, res) {
 	// var currentUser = req.session.username;
 	var currentUser = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
-	var content = req.body.twoteContent;
+	var contentURL = req.body.twoteContentURL;
 	var user = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
 	if (!user) {
 		res.end();
@@ -61,7 +61,7 @@ twotes.add = function (req, res) {
 				else {
 					var twoteObj = new Twote({
 						username: users._id,
-		    			content: content,
+		    			contentURL: contentURL,
 		    			notDeletable: true,
 					});
 
@@ -87,7 +87,7 @@ twotes.add = function (req, res) {
 										}
 									}
 										Twote
-										.findOne({ content: content })
+										.findOne({ contentURL: contentURL })
 										.populate('username') // <--
 										.exec(function (err, twote) {
 									 		 if (err) {
