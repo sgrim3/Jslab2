@@ -1,0 +1,7 @@
+<div class = "one-twote" >
+	<div id="twote-content" class= "{{username._id}}">{{@key}}{{content}}</div>
+    <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
+    {{#unless notDeletable}}
+    <input type="button" class = "delete" id="{{_id}}" value="X" /> 
+    {{/unless}}
+</div>
