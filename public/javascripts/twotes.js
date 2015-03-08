@@ -1,7 +1,6 @@
 //FORM
 var $form = $("#twote-form");
 
-
 //if form submit works
 var onSuccessForm = function (data, status) {
   if (data) {

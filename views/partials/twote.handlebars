@@ -1,7 +1,55 @@
 <div class = "one-twote" >
-	<div id="twote-content" class= "{{username._id}}">{{@key}}{{content}}</div>
+	<div id="player"></div>
     <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
     {{#unless notDeletable}}
     <input type="button" class = "delete" id="{{_id}}" value="X" /> 
     {{/unless}}
+
+    <!--stole this, replace with own code-->
+    <script>
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+    	player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+    }
+
+    player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+    </script>
+
 </div>
