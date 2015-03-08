@@ -13,12 +13,12 @@ var onSuccessForm = function (data, status) {
         var twoteContent = $("#twoteContent").val()
 
         //sending post request
-        $.post("twotes/add", {
-          twoteContent: twoteContent
-        })
-          .done(onSuccessForm)
-          .error(onErrorForm)
-    });
+    //     $.post("twotes/add", {
+    //       twoteContent: twoteContent
+    //     })
+    //       .done(onSuccessForm)
+    //       .error(onErrorForm)
+     });
        $(".delete").unbind().on("click",function(e) {
         console.log(e);
         var ID = $(this).attr("id");
