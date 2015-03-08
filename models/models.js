@@ -9,7 +9,7 @@ var UserSchema = new Schema({
 var TwoteSchema = new Schema({
     username : { type: Schema.ObjectId, ref: 'User' },
     // username: String,
-	contentURL: String,
+	contentVidID: String,
 	notDeletable: Boolean
 });
 

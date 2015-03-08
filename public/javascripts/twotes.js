@@ -9,15 +9,15 @@ var onSuccessForm = function (data, status) {
     $form.submit(function(event) {
         event.preventDefault();
 
-        //getting values of contentURL from form data
-        var twoteContentURL = $("#twoteContentURL").val()
+        //getting values of content from form data
+        var twoteContentVidID = $("#twoteContentVidID").val()
         $form.each(function(){
               this.reset();
           });
 
         //sending post request
     //     $.post("twotes/add", {
-    //       twoteContentURL: twoteContentURL
+    //       twoteContentVidID: twoteContentVidID
     //     })
     //       .done(onSuccessForm)
     //       .error(onErrorForm)
@@ -49,12 +49,12 @@ var onErrorForm = function(data, status) {
 $form.submit(function(event) {
   event.preventDefault();
 
-  //getting values of contentURL from form data
-  var twoteContentURL = $("#twoteContentURL").val()
+  //getting values of contentVidID from form data
+  var twoteContentVidID = $("#twoteContentVidID").val()
 
   //sending post request
   $.post("twotes/add", {
-    twoteContentURL: twoteContentURL
+    twoteContentVidID: twoteContentVidID
   })
     .done(onSuccessForm)
     .error(onErrorForm)
@@ -116,7 +116,7 @@ $("#logout").on("click",function(e) {
 
 //USER BUTTON
 $(".username-button").on("click",function(e) {
-  // $("#twote-contentURL").toggleClass('highlight');
+  // $("#twote-contentVidID").toggleClass('highlight');
   console.log(e);
   var userID = $(this).attr("id");
   $("."+userID).toggleClass('highlight');

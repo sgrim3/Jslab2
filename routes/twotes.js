@@ -46,66 +46,80 @@ twotes.list = function(req, res) {
 twotes.add = function (req, res) {
 	// var currentUser = req.session.username;
 	var currentUser = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
-	var contentURL = req.body.twoteContentURL;
-	var user = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
-	if (!user) {
-		res.end();
+	var vidURL = req.body.twoteContentVidID;
+
+	var indicatorString = "watch?v=";
+	var indicatorStringIndex = vidURL.indexOf(indicatorString);
+	console.log("indicatorStringIndex: "+ indicatorStringIndex)
+
+	if (indicatorStringIndex === -1) {
+		console.log ("Invalid URL, try again");
 	}
+	else {
+		var vidIDstart = indicatorStringIndex + indicatorString.length;
+		console.log("vidIDstart: " + vidIDstart)
+		var contentVidID = vidURL.substring(vidIDstart);
 
-	else{
-		User.findOne({"username": user}).exec(function (err, users) {
-			users.save (function (err) {
-				if (err) {
-					console.log("err: " +err);
-				}
-				else {
-					var twoteObj = new Twote({
-						username: users._id,
-		    			contentURL: contentURL,
-		    			notDeletable: true,
-					});
+		var user = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
+		if (!user) {
+			res.end();
+		}
 
-					//save new twote to databse
-					twoteObj.save(function (err) {
-				    	if (err) {
-				    		console.log("Err: " + err);
-				    	}
-				    	else {
-				    		Twote.find().sort({"time":-1}).populate('username').exec(function (err, twotes) {
-				    			if (err) {
-				    				console.log("Err: " + err);
-				    			}
-				    			else {
-				    				for (var i=0; i<twotes.length; i++) {
+		else{
+			User.findOne({"username": user}).exec(function (err, users) {
+				users.save (function (err) {
+					if (err) {
+						console.log("err: " +err);
+					}
+					else {
+						var twoteObj = new Twote({
+							username: users._id,
+			    			contentVidID: contentVidID,
+			    			notDeletable: true,
+						});
 
-										if (twotes[i].username.username ===currentUser) {
-											twotes[i].notDeletable = false;
+						//save new twote to databse
+						twoteObj.save(function (err) {
+					    	if (err) {
+					    		console.log("Err: " + err);
+					    	}
+					    	else {
+					    		Twote.find().sort({"time":-1}).populate('username').exec(function (err, twotes) {
+					    			if (err) {
+					    				console.log("Err: " + err);
+					    			}
+					    			else {
+					    				for (var i=0; i<twotes.length; i++) {
+
+											if (twotes[i].username.username ===currentUser) {
+												twotes[i].notDeletable = false;
+											}
+											else {
+												twotes[i].notDeletable = true;
+												console.log(twotes[i].username.username);
+											}
 										}
-										else {
-											twotes[i].notDeletable = true;
-											console.log(twotes[i].username.username);
-										}
-									}
-										Twote
-										.findOne({ contentURL: contentURL })
-										.populate('username') // <--
-										.exec(function (err, twote) {
-									 		 if (err) {
-									 		 	console.log ("err: " + err);
-									 		 }
-										});
-						    		res.render("partials/twote-list", {
-						    			twotes: twotes, 
-						    			layout: false
-						    		});
-						    	}
-						    });
-				    	}
-				    });
-				}
+											Twote
+											.findOne({ contentVidID: contentVidID })
+											.populate('username') // <--
+											.exec(function (err, twote) {
+										 		 if (err) {
+										 		 	console.log ("err: " + err);
+										 		 }
+											});
+							    		res.render("partials/twote-list", {
+							    			twotes: twotes, 
+							    			layout: false
+							    		});
+							    	}
+							    });
+					    	}
+					    });
+					}
+				})
 			})
-		})
-	}	
+		}	
+	}
 };
 
 
