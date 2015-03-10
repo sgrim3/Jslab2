@@ -1,6 +1,7 @@
 <div class = "one-twote" >
-	<div id="player">video goes here</div>
-	<div id="contentPrint">{{content}}</div>
+
+	<div id="player"></div>
+	<div id="twote-content" class= "{{username._id}}" name = '{{ContentVidID}}'>{{@key}}{{contentVidID}}</div>
     <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
     {{#unless notDeletable}}
     <input type="button" class = "delete" id="{{_id}}" value="X" /> 
@@ -8,11 +9,12 @@
 
     <!--stole this, replace with own code-->
     <script>
-    // var tag = document.createElement('script');
+    var content = $("#twote-content").attr("name");
+    var tag = document.createElement('script');
 
-    // tag.src = "https://www.youtube.com/iframe_api";
-    // var firstScriptTag = document.getElementsByTagName('script')[0];
-    // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     
     var player = new YT.Player('player', {
           height: '390',
