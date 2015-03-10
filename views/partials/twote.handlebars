@@ -12,19 +12,33 @@
     var content = $("#twote-content").attr("name");
     var tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+
+      var tag = document.createElement('script');
+      tag.src = "http://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      window.onYouTubePlayerAPIReady = function() {
+        makePlayer();
+      };
+      } 
+      else {
+
+         makePlayer();
+    }
     
-    var player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: content,
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-    });
+    function makePlayer(){
+      var player = new YT.Player('player', {
+            height: '390',
+            width: '640',
+            videoId: content,
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+      });
+    }
 
     function onPlayerReady(event) {
         event.target.playVideo();
