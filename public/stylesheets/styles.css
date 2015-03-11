@@ -199,6 +199,7 @@ input:focus {
   	display: block;
   	float: right;
   	width: auto;
+    height: auto;
 }
 
 .highlight {
@@ -218,4 +219,5 @@ input:focus {
   	cursor: pointer;
   	display:inline-block;
   	vertical-align: text-top;
+    border-radius: 5px;
 }
