@@ -1,7 +1,7 @@
 <div class = "one-twote" >
 
 	<div id="{{contentVidID}}"></div>
-	<div id="twote-content" class= "{{username._id}}" name = '{{contentVidID}}'>{{@key}}{{contentVidID}}</div>
+	<div id="twote-content" class= "{{username._id}}" name = '{{contentVidID}}'>{{@key}}<a href="{{contentVidID}}" target="_blank">{{contentVidID}}</a></div>
     <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
     {{#unless notDeletable}}
     <input type="button" class = "delete" id="{{_id}}" value="Delete" /> 
@@ -9,8 +9,12 @@
 
     <!--stole this, replace with own code-->
     <script>
-    var content = $("#twote-content").attr("name");
-    var tag = document.createElement('script');
+    var url = $("#twote-content").attr("name");
+    var indicatorString = "watch?v=";
+    var indicatorStringIndex = url.indexOf(indicatorString);
+    var vidIDstart = indicatorStringIndex + indicatorString.length;
+    var content= url.substring(vidIDstart);
+    console.log("content: "+content)
 
     if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
 
@@ -29,7 +33,7 @@
     }
     var player = null;
     function makePlayer(){
-      	player = new YT.Player(content, {
+      	player = new YT.Player(url, {
             height: '390',
             width: '640',
             videoId: content,
@@ -38,6 +42,7 @@
               'onStateChange': onPlayerStateChange
             }
       });
+        console.log("made player")
     }
 
     function onPlayerReady(event) {
