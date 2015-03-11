@@ -1,10 +1,10 @@
 <div class = "one-twote" >
 
-	<div id="player"></div>
-	<div id="twote-content" class= "{{username._id}}" name = '{{ContentVidID}}'>{{@key}}{{contentVidID}}</div>
+	<div id="{{contentVidID}}"></div>
+	<div id="twote-content" class= "{{username._id}}" name = '{{contentVidID}}'>{{@key}}{{contentVidID}}</div>
     <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
     {{#unless notDeletable}}
-    <input type="button" class = "delete" id="{{_id}}" value="X" /> 
+    <input type="button" class = "delete" id="{{_id}}" value="Delete" /> 
     {{/unless}}
 
     <!--stole this, replace with own code-->
@@ -27,9 +27,9 @@
 
          makePlayer();
     }
-    
+    var player = null;
     function makePlayer(){
-      var player = new YT.Player('player', {
+      	player = new YT.Player(content, {
             height: '390',
             width: '640',
             videoId: content,

@@ -20,39 +20,45 @@ users.list = function(req, res) {
 	})
 };
 
-//adding an ingredient to list
 users.add = function (req, res) {
-	console.log(req.user)
+	var found = false;
 	var username = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
 	console.log("stringify displayName: "+username);
-	// var username = req.body.username;
-	// req.session.username=username;
-	
-	var userObj = new User({
-		username: username
-	});
 
-	//save new user to databse
-	userObj.save(function (err) {
-    	if (err) {
-    		console.log("Err: " + err);
-    	}
-    	else {
-    		res.redirect("/")
-   //  		User.find().exec(function (err, users) {
-   //  			if (err) {
-   //  				console.log("Err: " + err);
-   //  			}
-   //  			else {
+	User.find().exec(function (err, users) {
+		if (err) {
+			return console.log("Something broke!");
+		}
+		else {
+			console.log("users: " + users)
+			for (var i=0; i<users.length;i++) {
+				if (users[i].username===username) {
+					found = true;
+					console.log("Found")
+					break;
+				}
+			}
 
-			// 		// res.render("partials/user-list", {
-		 //   //  			users: users, 
-		 //   //  			layout: false
-		 //   //  		});
-   //  			}	
-			// })	
-	    }
-    });
+			if (found===false) {
+				console.log("found is false")
+				var userObj = new User({
+					username: username
+				});
+
+				//save new user to databse
+				userObj.save(function (err) {
+			    	if (err) {
+			    		console.log("Err: " + err);
+			    	}
+			    	else {
+			    		res.redirect("/")	
+				    }
+			    });
+			}
+
+			else {res.redirect('/')}
+		}
+	})
 };
 
 users.login = function (req, res) {
@@ -61,34 +67,8 @@ users.login = function (req, res) {
 
 users.logout = function (req, res) {
 	req.logout();
-
-	// if (req.session){
-	// 	console.log (req.session.username);
-	// 	req.session = null
-	// }
 	res.redirect('/');
 }
-
-
-
-
-// users.highlight=function(req, res) {
-// 	var ID = req.body.ID;
-
-// 	Twote.find({'username': ID}).exec(function (err, twotes) {
-// 		if (err) {
-// 			return console.log ("Something broke");
-// 		}
-// 		else {
-// 			var twotesIDs =[];
-// 			for (var i=0;i<twotes.length;i++) {
-// 				twotesIDs[i] = twotes[i]._id;
-// 			}
-// 			res.send(twotesIDs);
-// 		}
-// 	})
-// }
-
 
 module.exports = users;
 
