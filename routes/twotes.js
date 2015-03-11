@@ -31,9 +31,10 @@ twotes.list = function(req, res) {
 					return console.log("Something broke");
 				}
 				else {
+					newTwotes = twotes.reverse();
 					res.render("twotes", {
 						currentUser: currentUser,
-						twotes: twotes,
+						twotes: newTwotes,
 						users: users
 					})
 				}
@@ -87,16 +88,18 @@ twotes.add = function (req, res) {
 											console.log(twotes[i].username.username);
 										}
 									}
-										Twote
-										.findOne({ contentVidID: contentVidID })
-										.populate('username') // <--
-										.exec(function (err, twote) {
-									 		 if (err) {
-									 		 	console.log ("err: " + err);
-									 		 }
-										});
+									Twote
+									.findOne({ contentVidID: contentVidID })
+									.populate('username') // <--
+									.exec(function (err, twote) {
+								 		 if (err) {
+								 		 	console.log ("err: " + err);
+								 		 }
+									});
+
+									var newTwotes = twotes.reverse();
 						    		res.render("partials/twote-list", {
-						    			twotes: twotes, 
+						    			twotes: newTwotes, 
 						    			layout: false
 						    		});
 						    	}
