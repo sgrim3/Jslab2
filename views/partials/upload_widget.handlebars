@@ -1,6 +1,6 @@
 <div class = "upload_widget">
 
-	<div id = "widget">upload?</div>
+	<div id = "widget"></div>
 	<div id ="upload_player"></div>
 	<div id ="vid_player"></div>
 </div>
@@ -37,8 +37,6 @@
 
     function onProcessingComplete(event) {
         upload_player = new YT.Player('upload_player', {
-          height: '200',
-          width: '400',
           videoId: event.data.videoId,
           events: {}
         });
@@ -46,8 +44,6 @@
 
     function makePlayer(){
       	vid_player= new YT.Player('vid_player', {
-            height: '390',
-            width: '640',
             videoId: content,
             events: {
               'onReady': onPlayerReady,

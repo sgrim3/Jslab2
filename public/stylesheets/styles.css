@@ -94,9 +94,11 @@ input:focus {
   	margin-bottom: 10px;
   	margin-top: 10px;
   	height: auto;
-    width: auto;
+    width: 650px;
   	display: block;
   	padding: 20px;
+    float: left;
+    list-style-type: none;
 
 
 }
@@ -104,6 +106,7 @@ input:focus {
 	display: inline-block;
 	float: left;
 	padding-left: 0px;
+  list-style-type: none;
 }
 
 .one-user {
@@ -135,6 +138,9 @@ input:focus {
 
 #twotesPage-header {
 	text-align: left;
+  position: fixed;
+  width: 100%;
+
 }
 
 #Twoter-header {
@@ -210,14 +216,36 @@ input:focus {
 #fbLogin {
 	margin: auto;
 	width: auto;
-  	height: 46px;
-  	background: #f2a4a4;
-  	font-family: inherit;
-  	font-weight: bold;
-  	color: inherit;
-  	letter-spacing: 1px;
-  	cursor: pointer;
-  	display:inline-block;
-  	vertical-align: text-top;
-    border-radius: 5px;
+	height: 46px;
+	background: #f2a4a4;
+	font-family: inherit;
+	font-weight: bold;
+	color: inherit;
+	letter-spacing: 1px;
+	cursor: pointer;
+	display:inline-block;
+	vertical-align: text-top;
+  border-radius: 5px;
+}
+
+#upload_widget {
+  top: 5px;
+  position: relative;
+  right: 0px;
+}
+
+#widget {
+  max-width: 400px;
+  max-height: 200px;
+  float: right;
+  padding-bottom: 30px; 
+}
+
+#vid_player {
+  max-height: 390px;
+  max-width: 640px;
+}
+
+#list_item {
+  list-style-type: none;
 }
