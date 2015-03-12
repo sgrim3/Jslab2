@@ -1,68 +1,19 @@
 <div class = "one-twote" >
 
-	<div id="{{contentVidID}}"></div>
-	<div id="twote-content" class= "{{username._id}}" name = '{{contentVidID}}'>{{@key}}<a href="{{contentVidID}}" target="_blank">{{contentVidID}}</a></div>
+	<div id="twote-content" class= "{{username._id}}" name = '{{contentVidID}}'>{{@key}}</div>
+    <input type="button" class="video" value = "{{contentVidID}}"/>
     <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
     {{#unless notDeletable}}
-    <input type="button" class = "delete" id="{{_id}}" value="Delete" /> 
+    <input type="button" class = "delete" id="{{_id}}" value="Delete"/> 
     {{/unless}}
-    <script>
 
-    var widget;
-    var upload_player;
-    
+    <script>
     var url = $("#twote-content").attr("name");
     var indicatorString = "watch?v=";
     var indicatorStringIndex = url.indexOf(indicatorString);
     var vidIDstart = indicatorStringIndex + indicatorString.length;
     var content= url.substring(vidIDstart);
     console.log("content: "+content)
-
-    // if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
-
-    //   var tag = document.createElement('script');
-    //   tag.src = "http://www.youtube.com/iframe_api";
-    //   var firstScriptTag = document.getElementsByTagName('script')[0];
-    //   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    //   window.onYouTubePlayerAPIReady = function() {
-    //     makePlayer();
-    //     makeWidget();
-    //   };
-    //   } 
-    //   else {
-
-    //      makePlayer();
-    // }
-    
-    // makePlayer();
-    // function makePlayer(){
-    //   	player = new YT.Player(url, {
-    //         height: '390',
-    //         width: '640',
-    //         videoId: content,
-    //         events: {
-    //           'onReady': onPlayerReady,
-    //           'onStateChange': onPlayerStateChange
-    //         }
-    //   });
-    //     console.log("made player")
-    // }
-
-    // function onPlayerReady(event) {
-    //     event.target.playVideo();
-    // }
-
-    // var done = false;
-    // function onPlayerStateChange(event) {
-    //     if (event.data == YT.PlayerState.PLAYING && !done) {
-    //       setTimeout(stopVideo, 6000);
-    //       done = true;
-    //     }
-    // }
-    // function stopVideo() {
-    //     player.stopVideo();
-    // }
     </script>
 
 </div>
