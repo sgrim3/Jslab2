@@ -86,13 +86,13 @@ var onErrorDelete = function(data, status) {
 $(".delete").on("click",function(e) {
   console.log(e);
   var ID = $(this).attr("id");
+
   $.post("/twotes/delete", {
     ID: ID
   })
   .done(onSuccessDelete)
   .error(onErrorDelete)
 });
-
 
 //LOGOUT BUTTON
 var onSuccessLogout = function(data, status) {
@@ -121,3 +121,16 @@ $(".username-button").on("click",function(e) {
   $("."+userID).toggleClass('highlight');
   $("#"+userID).toggleClass('highlight');
 })
+
+
+//Video Change BUTTON
+$(".video").on("click",function(e){
+  var url = $(this).attr("value");
+  console.log("Name: "+url);
+  var indicatorString = "watch?v=";
+  var indicatorStringIndex = url.indexOf(indicatorString);
+  var vidIDstart = indicatorStringIndex + indicatorString.length;
+  var content= url.substring(vidIDstart);
+
+  vid_player.loadVideoById({videoId:content});
+});
