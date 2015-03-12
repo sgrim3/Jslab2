@@ -134,3 +134,16 @@ $(".video").on("click",function(e){
 
   vid_player.loadVideoById({videoId:content});
 });
+
+
+
+//Record Video Button
+
+$('#widget').hide();
+$('#filler_div').show();
+
+
+$("#record-button").on("click",function(e){
+  $("#widget").show();
+  $('#filler_div').hide();
+});

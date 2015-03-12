@@ -33,6 +33,9 @@
 
     function onUploadSuccess(event) {
         alert('Video ID ' + event.data.videoId + ' was uploaded and is currently being processed.');
+        $('#widget').hide();
+        $('#filler_div').show();
+
     }
 
     function onProcessingComplete(event) {
