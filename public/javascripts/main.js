@@ -1,26 +1,15 @@
-<!-- Create and contain all youtube objects, load youtube API on creation-->
 
-<div class = "upload_widget">
+	var tag = document.createElement('script');
 
-	<div id = "widget"></div>
-	<div id ="vid_player"></div>
-</div>
-
-<script>
-	var widget;
-	var upload_player;
-	var vid_player;
-
-    var tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/iframe_api";
+    tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    
-    window.onYouTubePlayerAPIReady = function() {
-        makeWidget();
-        makePlayer();
-    };
 
+    function onYouTubeIframeAPIReady(){
+  		makeWidget();
+  		makePlayer(url);
+    }
+    
     function makeWidget(){
     	console.log("Make a widget")
       	widget = new YT.UploadWidget('widget', {
@@ -37,11 +26,26 @@
     }
 
     function onProcessingComplete(event) {
-    	vid_player.loadVideoById(event.data.videoId);
+        upload_player = new YT.Player('upload_player', {
+          height: '200',
+          width: '400',
+          videoId: event.data.videoId,
+          events: {}
+        });
     }
 
-    function makePlayer(){
-      	vid_player= new YT.Player('vid_player', {
+    var url = $("#player-replace").attr("name");
+
+    function makePlayer(vidUrl){
+    	var indicatorString = "watch?v=";
+    	var indicatorStringIndex = url.indexOf(indicatorString);
+    	var vidIDstart = indicatorStringIndex + indicatorString.length;
+    	var content= url.substring(vidIDstart);
+    	console.log("content: "+content)
+    
+      	player = new YT.Player('player-replace', {
+            height: '390',
+            width: '640',
             videoId: content,
             events: {
               'onReady': onPlayerReady,
@@ -50,6 +54,7 @@
       });
         console.log("made player")
     }
+
 
     function onPlayerReady(event) {
         event.target.playVideo();
@@ -62,8 +67,7 @@
           done = true;
         }
     }
-    function stopVideo() {
-        vid_player.stopVideo();
-    }
 
-</script>
+    function stopVideo(){
+        player.stopVideo();
+   }

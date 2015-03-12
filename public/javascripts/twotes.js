@@ -1,3 +1,6 @@
+// Scripts for all partials included in twotes.handlebars. Includes twote submission, twote deletion, username highlighting and 
+// video switching on button press. 
+
 //FORM
 var $form = $("#twote-form");
 
@@ -14,12 +17,6 @@ var onSuccessForm = function (data, status) {
               this.reset();
           });
 
-        //sending post request
-    //     $.post("twotes/add", {
-    //       twoteContentVidID: twoteContentVidID
-    //     })
-    //       .done(onSuccessForm)
-    //       .error(onErrorForm)
      });
        $(".delete").unbind().on("click",function(e) {
         console.log(e);
@@ -115,7 +112,6 @@ $("#logout").on("click",function(e) {
 
 //USER BUTTON
 $(".username-button").on("click",function(e) {
-  // $("#twote-contentVidID").toggleClass('highlight');
   console.log(e);
   var userID = $(this).attr("id");
   $("."+userID).toggleClass('highlight');
@@ -123,8 +119,10 @@ $(".username-button").on("click",function(e) {
 })
 
 
-//Video Change BUTTON
-$(".video").on("click",function(e){
+//VIDEO CHANGE BUTTON
+
+$('body').on('click', '.video', function(ev) {
+   //Get URL of twote and find the corresponding videoID
   var url = $(this).attr("value");
   console.log("Name: "+url);
   var indicatorString = "watch?v=";

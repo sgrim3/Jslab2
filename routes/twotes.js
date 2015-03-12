@@ -1,3 +1,5 @@
+// Handle twote adding and removal
+
 //require my modules
 var path = require("path");
 var User = require(path.join(__dirname,"../models/models")).user;

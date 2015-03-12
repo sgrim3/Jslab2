@@ -1,8 +1,9 @@
+// Add, log in and remove users
+
 //require my modules
 var path = require("path");
 var User = require(path.join(__dirname,"../models/models")).user;
 var Twote = require(path.join(__dirname,"../models/models")).twote;
-
 
 var users = {};
 

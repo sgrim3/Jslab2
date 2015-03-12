@@ -1,19 +1,24 @@
+<!-- Partial for a single twote; contains video switching and twote deletion buttons -->
+
 <div class = "one-twote" >
 
 	<div id="twote-content" class= "{{username._id}}" name = '{{contentVidID}}'>{{@key}}</div>
-    <input type="button" class="video" value = "{{contentVidID}}"/>
+
+    <input type="button" class="video" value = "{{contentVidID}}"/><!-- change videos -->
+
     <div id="usernameTwote" class= "{{username._id}}"> -{{username.username}} </div>
     {{#unless notDeletable}}
     <input type="button" class = "delete" id="{{_id}}" value="Delete"/> 
     {{/unless}}
 
-    <script>
+</div>
+
+<!-- Extract video ID from URL -->
+<script>
     var url = $("#twote-content").attr("name");
     var indicatorString = "watch?v=";
     var indicatorStringIndex = url.indexOf(indicatorString);
     var vidIDstart = indicatorStringIndex + indicatorString.length;
     var content= url.substring(vidIDstart);
     console.log("content: "+content)
-    </script>
-
-</div>
+</script>
