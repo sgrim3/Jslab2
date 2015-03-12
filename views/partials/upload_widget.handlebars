@@ -1,75 +1,7 @@
-<div class = "upload_widget">
+<div class = "upload_widget" id="load">
 
 	<div id = "widget">upload?</div>
 	<div id ="upload_player"></div>
 	<div id ="vid_player"></div>
 </div>
 
-<script>
-	var widget;
-	var upload_player;
-	var vid_player;
-
-    var tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    
-    window.onYouTubePlayerAPIReady = function() {
-        makeWidget();
-        makePlayer();
-    };
-
-    function makeWidget(){
-    	console.log("Make a widget")
-      	widget = new YT.UploadWidget('widget', {
-            height: 500,
-            events:{
-            	'onUploadSuccess':onUploadSuccess,
-            	'onProcessingComplete':onProcessingComplete
-            }
-      });
-    }
-
-    function onUploadSuccess(event) {
-        alert('Video ID ' + event.data.videoId + ' was uploaded and is currently being processed.');
-    }
-
-    function onProcessingComplete(event) {
-        upload_player = new YT.Player('upload_player', {
-          height: '200',
-          width: '400',
-          videoId: event.data.videoId,
-          events: {}
-        });
-    }
-
-    function makePlayer(){
-      	vid_player= new YT.Player('vid_player', {
-            height: '390',
-            width: '640',
-            videoId: content,
-            events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-            }
-      });
-        console.log("made player")
-    }
-
-    function onPlayerReady(event) {
-        event.target.playVideo();
-    }
-
-    var done = false;
-    function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
-        }
-    }
-    function stopVideo() {
-        player.stopVideo();
-    }
-
-</script>
